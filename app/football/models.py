@@ -18,16 +18,23 @@ class Player(models.Model):
     location = models.ForeignKey(Location,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.email
+        return f"{self.user} {self.user.email}"
 
 class Team(models.Model):
-    player_one = models.ManyToManyField(Player,related_name='%(class)s_player_one')
-    player_two = models.ManyToManyField(Player,related_name='%(class)s_player_two')
+    name = models.CharField(max_length=255)
+    player_one = models.OneToOneField(Player,related_name='%(class)s_player_one', on_delete=models.CASCADE)
+    player_two = models.OneToOneField(Player,related_name='%(class)s_player_two', on_delete=models.CASCADE)
     home_postition = models.BooleanField()
+
+    def __str__(self):
+        return f"{self.player_one.user} -- {self.player_two.user}"
 class Match(models.Model):
-    home_team = models.ManyToManyField(Team,related_name='%(class)s_home_team')
-    away_team = models.ManyToManyField(Team,related_name='%(class)s_away_team')
+    
+    home_team = models.OneToOneField(Team,related_name='%(class)s_home_team',on_delete=models.CASCADE)
+    away_team = models.OneToOneField(Team,related_name='%(class)s_away_team',on_delete=models.CASCADE)
     home_score = models.IntegerField()
     away_score = models.IntegerField()
     # positon of players True => player1 is in the front False => player one is in the back
 
+    def __str__(self):
+        return f"{self.home_team} VS {self.away_team}"
