@@ -38,19 +38,17 @@ class Match(models.Model):
 
     def __str__(self):
         return f"{self.home_team} VS {self.away_team}"
-
+class BestMode(models.TextChoices):
+    ONE_MODE = "1"
+    BEST_OF_THREE_MODE = "3"
+    BEST_OF_FIVE_MODE = "5"
 
 class Game(models.Model):
-    ONE_MODE = "one"
-    BEST_OF_THREE_MODE = "best of three"
-    BEST_OF_FIVE_MODE = "best of five"
-    MODES = (
-        (ONE_MODE, "one"),
-        (BEST_OF_THREE_MODE, "best of three"),
-        (BEST_OF_FIVE_MODE, "best of five"),
-    )
+    
+    
+    
     matches = models.ManyToManyField(Match)
     time = models.DateTimeField()
-    mode = models.CharField(max_length=3,
-                  choices=MODES,
-                  default="one")    
+    mode = models.CharField(max_length=1,
+                  choices=BestMode.choices,
+                  default=BestMode.ONE_MODE)    
