@@ -6,5 +6,5 @@ class PlayerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Player
-        fields = '__all__'
+        fields = "__all__"
         read_only_fields = ('id', 'created_date', 'updated_date')
