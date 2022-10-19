@@ -1,6 +1,6 @@
 from football.serializers import PlayerSerializer
 
-def valid_movie_serializer():
+def test_valid_movie_serializer():
     valid_serializer_data = {
         "name": "Michael",
         "location": "Berlin",
