@@ -19,3 +19,19 @@ class Player(models.Model):
 
     def __str__(self):
         return self.user.email
+
+
+class Match(models.Model):
+    home_player_one = models.ForeignKey(Player,on_delete=models.CASCADE)
+    home_player_two = models.ForeignKey(Player,on_delete=models.CASCADE)
+    away_player_one = models.ForeignKey(Player,on_delete=models.CASCADE)
+    away_player_two = models.ForeignKey(Player,on_delete=models.CASCADE)
+    home_score = models.IntegerField()
+    away_score = models.IntegerField()
+    # positon of players True => player1 is in the front False => player one is in the back
+    home_postition = models.BooleanField()
+    away_position = models.BooleanField()
+
+    def __str__(self)
+
+    
