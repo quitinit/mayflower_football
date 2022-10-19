@@ -20,18 +20,14 @@ class Player(models.Model):
     def __str__(self):
         return self.user.email
 
-
+class Team(models.Model):
+    player_one = models.ManyToManyField(Player,related_name='%(class)s_player_one')
+    player_two = models.ManyToManyField(Player,related_name='%(class)s_player_two')
+    home_postition = models.BooleanField()
 class Match(models.Model):
-    home_player_one = models.ForeignKey(Player,on_delete=models.CASCADE)
-    home_player_two = models.ForeignKey(Player,on_delete=models.CASCADE)
-    away_player_one = models.ForeignKey(Player,on_delete=models.CASCADE)
-    away_player_two = models.ForeignKey(Player,on_delete=models.CASCADE)
+    home_team = models.ManyToManyField(Team,related_name='%(class)s_home_team')
+    away_team = models.ManyToManyField(Team,related_name='%(class)s_away_team')
     home_score = models.IntegerField()
     away_score = models.IntegerField()
     # positon of players True => player1 is in the front False => player one is in the back
-    home_postition = models.BooleanField()
-    away_position = models.BooleanField()
 
-    def __str__(self)
-
-    
