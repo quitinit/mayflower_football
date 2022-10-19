@@ -14,7 +14,7 @@ class Location(models.Model):
         return self.name
 
 class Player(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,related_name='user')
     location = models.ForeignKey(Location,on_delete=models.CASCADE)
 
     def __str__(self):
@@ -38,3 +38,5 @@ class Match(models.Model):
 
     def __str__(self):
         return f"{self.home_team} VS {self.away_team}"
+
+        
