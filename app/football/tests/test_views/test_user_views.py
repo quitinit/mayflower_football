@@ -4,7 +4,7 @@ import pytest
 from football.models import Player
 
 @pytest.mark.django_db
-def test_create_player_success(client):
+def create_player_success(client):
     players = Player.objects.all()
     assert len(players) == 0
     response = client.post(
